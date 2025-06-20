@@ -1,0 +1,35 @@
+# Compiled binary files
+*.exe
+*.o
+*.out
+*.obj
+*.so
+*.a
+
+# Build folders
+/Debug/
+/Release/
+/build/
+/bin/
+/CMakeFiles/
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+
+# Eclipse project files (se você quiser manter só o código-fonte no GitHub)
+.project
+.cproject
+.settings/
+
+# VS Code (caso use junto)
+.vscode/
+
+# Temporary files
+*.log
+*.tmp
+*~
+*.swp
+
+# System files (Windows/Mac)
+.DS_Store
+Thumbs.db
