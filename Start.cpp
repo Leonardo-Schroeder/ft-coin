@@ -10,7 +10,7 @@ using namespace std;
 void welcome()
 {
     cout << "==========================================" << endl;
-    cout << " Welcome to the Cash Flow Controller CLI " << endl;
+    cout << " Welcome to the FT Coin " << endl;
     cout << "==========================================" << endl;
     cout << endl;
 }
@@ -37,7 +37,7 @@ int main()
         cerr << "Unexpected error. Program aborted.\nReason: " << e.what() << endl;
         return 1;
     }
-
+    
     goodbye();
     return 0;
 }

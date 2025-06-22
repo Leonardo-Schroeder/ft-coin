@@ -1,32 +1,37 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include <string>
+#include "WalletService.h"
+#include "IWalletDAO.h"
+#include <memory>
 #include <vector>
+#include <string>
 
-enum class DataBaseSelector { MEMORY, MARIADB };
+using namespace std;
 
-class Controller
-{
+enum class DataBaseSelector {
+    MEMORY,
+    MARIADB
+};
+
+class Controller {
+private:
+    shared_ptr<IWalletDAO> memoryDBConnection;
+    shared_ptr<IWalletDAO> serverDBConnection;
+    unique_ptr<WalletService> walletService;
+
+    void launchActions(string title, vector<string> menuItems, vector<void (Controller::*)()> functions);
+
 public:
-    Controller(DataBaseSelector dbSelector = DataBaseSelector::MEMORY);
+    Controller(DataBaseSelector dbSelector);
     ~Controller();
 
-    void start(); // Starts the main menu
+    void start();
 
-private:
-    // Future database connection placeholders
-    void* memoryDBConnection;
-    void* serverDBConnection;
-
-    // Menu navigation
-    void launchActions(std::string title, std::vector<std::string> menuItems, std::vector<void (Controller::*)()> functions);
-
-    // Main menu actions
     void walletMenu();
     void movementMenu();
     void reportsMenu();
     void helpMenu();
 };
 
-#endif // CONTROLLER_H
+#endif

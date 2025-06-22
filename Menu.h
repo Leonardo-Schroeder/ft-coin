@@ -46,4 +46,4 @@ class Menu final
 		void setZeroForLastOpt(bool zeroForLastOpt = true);
 	};
 
-#endif /* MENU_H_ */
+#endif

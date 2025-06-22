@@ -1,0 +1,20 @@
+#ifndef IWALLETDAO_H
+#define IWALLETDAO_H
+
+#include "Wallet.h"
+#include <vector>
+
+using namespace std;
+
+class IWalletDAO {
+public:
+    virtual ~IWalletDAO() = default;
+
+    virtual void addWallet(const Wallet& wallet) = 0;
+    virtual Wallet* getWalletById(int id) = 0;
+    virtual vector<Wallet> getAllWallets() = 0;
+    virtual bool updateWallet(const Wallet& wallet) = 0;
+    virtual bool deleteWallet(int id) = 0;
+};
+
+#endif
