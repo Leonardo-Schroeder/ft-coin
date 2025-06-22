@@ -1,11 +1,13 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include "WalletService.h"
-#include "IWalletDAO.h"
+
 #include <memory>
 #include <vector>
 #include <string>
+#include "WalletService.h"
+#include "IWalletDAO.h"
+#include "HelpService.h"
 
 using namespace std;
 
@@ -19,7 +21,7 @@ private:
     shared_ptr<IWalletDAO> memoryDBConnection;
     shared_ptr<IWalletDAO> serverDBConnection;
     unique_ptr<WalletService> walletService;
-
+    HelpService helpService;
     void launchActions(string title, vector<string> menuItems, vector<void (Controller::*)()> functions);
 
 public:

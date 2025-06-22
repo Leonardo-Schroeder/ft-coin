@@ -1,7 +1,7 @@
 #include "Controller.h"
 #include "Menu.h"
-#include "WalletDAOMemory.h"
 #include <iostream>
+#include "WalletDAOMemory.h"
 
 using namespace std;
 
@@ -93,6 +93,32 @@ void Controller::reportsMenu() {
     cout << "\n[Reports Menu] – Under construction.\n";
 }
 
-void Controller::helpMenu() {
-    cout << "\nFT_Coin Wallet Management System\nVersion: 1.0\nAuthors: Your Team\n";
+void Controller::helpMenu()
+{
+    std::vector<std::string> menuItems = {
+        "Help Text",
+        "Credits",
+        "Back"
+    };
+
+    Menu menu(menuItems, "Help Menu", "Choose an option: ");
+    menu.setSymbol(">>");
+
+    while (int choice = menu.getChoice())
+    {
+        switch (choice)
+        {
+            case 1:
+                helpService.printHelpText();
+                break;
+            case 2:
+                helpService.printCredits();
+                break;
+            case 3:
+                return;
+            default:
+                std::cout << "Invalid choice. Try again.\n";
+                break;
+        }
+    }
 }
