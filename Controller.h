@@ -10,6 +10,9 @@
 #include "HelpService.h"
 #include "./Oracle/IOracleDAO.h"
 #include "./Oracle/OracleDAOMemory.h"
+#include "./Movement/MovementDAOMemory.h"
+#include "./Movement/MovementService.h"
+#include "./Report/ReportService.h"
 
 using namespace std;
 
@@ -22,8 +25,11 @@ class Controller {
 private:
     shared_ptr<IWalletDAO> memoryDBConnection;
     shared_ptr<IWalletDAO> serverDBConnection;
+    shared_ptr<IMovementDAO> movementDBConnection;
     shared_ptr<IOracleDAO> oracleDAO = make_shared<OracleDAOMemory>();
     unique_ptr<WalletService> walletService;
+    unique_ptr<MovementService> movementService;
+    std::unique_ptr<ReportService> reportService;
     HelpService helpService;
     void launchActions(string title, vector<string> menuItems, vector<void (Controller::*)()> functions);
 

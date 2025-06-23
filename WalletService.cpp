@@ -29,7 +29,7 @@ void WalletService::createWallet() {
         }
         
         if (!isNumeric) {
-            cout << "Error: ID must be a numeric value.\n";
+            cout << "Error: ID must be a numeric value.\n\n";
             continue;
         }
         
@@ -37,13 +37,13 @@ void WalletService::createWallet() {
         try {
             id = stoi(idInput);
         } catch (...) {
-            cout << "Error: Invalid ID format.\n";
+            cout << "Error: Invalid ID format.\n\n";
             continue;
         }
         
         // ID alredy exist
         if (dao->getWalletById(id) != nullptr) {
-            cout << "Error: A wallet with this ID already exists.\n";
+            cout << "Error: A wallet with this ID already exists.\n\n";
         } else {
             validId = true;
         }
@@ -55,7 +55,7 @@ void WalletService::createWallet() {
     	getline(cin, name);
 
     	if (name.empty()) 
-        	cout << "Error: Owner name cannot be empty.\n";
+        	cout << "Error: Owner name cannot be empty.\n\n";
     } while(name.empty());
 
     // Validation Broker name
@@ -64,18 +64,18 @@ void WalletService::createWallet() {
     	getline(cin, broker);
 
      	if(broker.empty()) 
-        	cout << "Error: Broker name cannot be empty.\n";
+        	cout << "Error: Broker name cannot be empty.\n\n";
     } while(broker.empty());
 
     dao->addWallet(Wallet(id, name, broker));
-    cout << "Wallet successfully created!\n";
+    cout << "Wallet successfully created!\n\n";
 }
 
 // Function for depuration
 void WalletService::listWallets() {
     cout << "\n--- List of Wallets ---\n";
     for (const auto& w : dao->getAllWallets()) {
-        cout << w.toString() << endl;
+        cout << w.toString() << endl ;
     }
 }
 
@@ -86,9 +86,9 @@ void WalletService::findWalletById() {
 
     Wallet* w = dao->getWalletById(id);
     if (w) {
-        cout << "Found: " << w->toString() << endl;
+        cout << "Found: " << w->toString() << endl << endl;
     } else {
-        cout << "Wallet not found.\n";
+        cout << "Wallet not found.\n\n";
     }
 }
 
@@ -113,9 +113,9 @@ void WalletService::updateWallet() {
 
     Wallet updated(id, name, broker);
     if (dao->updateWallet(updated)) {
-        cout << "Wallet updated successfully.\n";
+        cout << "Wallet updated successfully.\n\n";
     } else {
-        cout << "Update failed.\n";
+        cout << "Update failed.\n\n";
     }
 }
 
@@ -125,8 +125,8 @@ void WalletService::deleteWallet() {
     cin >> id;
 
     if (dao->deleteWallet(id)) {
-        cout << "Wallet deleted.\n";
+        cout << "Wallet deleted.\n\n";
     } else {
-        cout << "Wallet not found.\n";
+        cout << "Wallet not found.\n\n";
     }
 }

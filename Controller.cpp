@@ -12,11 +12,15 @@ Controller::Controller(DataBaseSelector dbSelector)
     {
         case DataBaseSelector::MEMORY:
             memoryDBConnection = make_shared<WalletDAOMemory>();
-            walletService = make_unique<WalletService>(memoryDBConnection);
+            movementDBConnection = make_shared<MovementDAOMemory>();
             
             // Create and populate oracle
             oracleDAO = make_shared<OracleDAOMemory>();
 			oracleDAO->populateMockData();
+			
+			walletService = make_unique<WalletService>(memoryDBConnection);
+            movementService = make_unique<MovementService>(movementDBConnection, memoryDBConnection, oracleDAO);
+			reportService = make_unique<ReportService>(memoryDBConnection, movementDBConnection, oracleDAO);
 
             break;
 
@@ -91,12 +95,56 @@ void Controller::walletMenu()
     }
 }
 
-void Controller::movementMenu() {
-    cout << "\n[Movement Menu] – Under construction.\n";
+void Controller::movementMenu()
+{
+    vector<string> menuItems = {
+        "Register Buy",
+        "Register Sell",
+        //"Show Wallet Movement History", Function for Debug
+        "Back"
+    };
+
+    vector<void (MovementService::*)()> actions = {
+        &MovementService::registerBuy,
+        &MovementService::registerSell,
+        //&MovementService::showWalletHistory Function for Debug
+    };
+
+    Menu menu(menuItems, "Movement Menu", "Select an option: ");
+    menu.setSymbol(">>");
+
+    while (int choice = menu.getChoice()) {
+        if (choice >= 1 && choice <= 3)
+            (movementService.get()->*actions.at(choice - 1))();
+    }
 }
 
-void Controller::reportsMenu() {
-    cout << "\n[Reports Menu] – Under construction.\n";
+void Controller::reportsMenu()
+{
+    vector<string> menuItems = {
+        "List Wallets by ID",
+        "List Wallets by Name",
+        "Show Wallet Balance",
+        "Show Wallet History",
+        "Show Wallet Profit/Loss",
+        "Back"
+    };
+
+    vector<void (ReportService::*)()> actions = {
+        &ReportService::listWalletsById,
+        &ReportService::listWalletsByName,
+        &ReportService::showWalletBalance,
+        &ReportService::showWalletHistory,
+        &ReportService::showWalletProfitOrLoss
+    };
+
+    Menu menu(menuItems, "Reports Menu", "Select an option: ");
+    menu.setSymbol(">>");
+
+    while (int choice = menu.getChoice()) {
+        if (choice >= 1 && choice <= 5)
+            (reportService.get()->*actions.at(choice - 1))();
+    }
 }
 
 void Controller::helpMenu()
