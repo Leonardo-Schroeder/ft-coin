@@ -2,6 +2,7 @@
 #include "Menu.h"
 #include <iostream>
 #include "WalletDAOMemory.h"
+#include "./Oracle/OracleDAOMemory.h"
 
 using namespace std;
 
@@ -12,6 +13,11 @@ Controller::Controller(DataBaseSelector dbSelector)
         case DataBaseSelector::MEMORY:
             memoryDBConnection = make_shared<WalletDAOMemory>();
             walletService = make_unique<WalletService>(memoryDBConnection);
+            
+            // Create and populate oracle
+            oracleDAO = make_shared<OracleDAOMemory>();
+			oracleDAO->populateMockData();
+
             break;
 
         case DataBaseSelector::MARIADB:

@@ -8,6 +8,8 @@
 #include "WalletService.h"
 #include "IWalletDAO.h"
 #include "HelpService.h"
+#include "./Oracle/IOracleDAO.h"
+#include "./Oracle/OracleDAOMemory.h"
 
 using namespace std;
 
@@ -20,6 +22,7 @@ class Controller {
 private:
     shared_ptr<IWalletDAO> memoryDBConnection;
     shared_ptr<IWalletDAO> serverDBConnection;
+    shared_ptr<IOracleDAO> oracleDAO = make_shared<OracleDAOMemory>();
     unique_ptr<WalletService> walletService;
     HelpService helpService;
     void launchActions(string title, vector<string> menuItems, vector<void (Controller::*)()> functions);
