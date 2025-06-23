@@ -10,18 +10,68 @@ void WalletService::createWallet() {
     string name, broker;
 
     cout << "\n--- Create Wallet ---\n";
-    cout << "Enter wallet ID: ";
-    cin >> id;
-    cin.ignore(); // flush newline
-    cout << "Enter owner name: ";
-    getline(cin, name);
-    cout << "Enter broker: ";
-    getline(cin, broker);
+    
+    // Validation ID
+    bool validId = false;
+    while (!validId) {
+		string idInput;
+		
+        cout << "Enter wallet ID: ";
+        getline(cin, idInput);
+        
+        //  only digits
+        bool isNumeric = true;
+        for (char c : idInput) {
+            if (!isdigit(c)) {
+                isNumeric = false;
+                break;
+            }
+        }
+        
+        if (!isNumeric) {
+            cout << "Error: ID must be a numeric value.\n";
+            continue;
+        }
+        
+        // Int validation
+        try {
+            id = stoi(idInput);
+        } catch (...) {
+            cout << "Error: Invalid ID format.\n";
+            continue;
+        }
+        
+        // ID alredy exist
+        if (dao->getWalletById(id) != nullptr) {
+            cout << "Error: A wallet with this ID already exists.\n";
+        } else {
+            validId = true;
+        }
+    }
+    
+    // Validation Name
+	do {
+    	cout << "Enter owner name: ";
+    	getline(cin, name);
+
+    	if (name.empty()) 
+        	cout << "Error: Owner name cannot be empty.\n";
+    } while(name.empty());
+
+    // Validation Broker name
+	do {
+    	cout << "Enter broker: ";
+    	getline(cin, broker);
+
+     	if(broker.empty()) 
+        	cout << "Error: Broker name cannot be empty.\n";
+    } while(broker.empty());
 
     dao->addWallet(Wallet(id, name, broker));
     cout << "Wallet successfully created!\n";
 }
 
+// Function for depuration
 void WalletService::listWallets() {
     cout << "\n--- List of Wallets ---\n";
     for (const auto& w : dao->getAllWallets()) {

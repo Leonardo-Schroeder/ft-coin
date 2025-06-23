@@ -15,4 +15,5 @@ public:
     bool deleteWallet(int id) override;
 };
 
-#endif // WALLET_DAO_MEMORY_H
+#endif
+

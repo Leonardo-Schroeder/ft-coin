@@ -61,7 +61,7 @@ void Controller::walletMenu()
 {
     vector<string> menuItems = {
         "Create Wallet",
-        "List Wallets",
+        //"List Wallets",
         "Search Wallet by ID",
         "Edit Wallet",
         "Delete Wallet",
@@ -70,7 +70,7 @@ void Controller::walletMenu()
 
     vector<void (WalletService::*)()> actions = {
         &WalletService::createWallet,
-        &WalletService::listWallets,
+        //&WalletService::listWallets,
         &WalletService::findWalletById,
         &WalletService::updateWallet,
         &WalletService::deleteWallet
