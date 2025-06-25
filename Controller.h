@@ -5,14 +5,14 @@
 #include <memory>
 #include <vector>
 #include <string>
-#include "WalletService.h"
-#include "IWalletDAO.h"
-#include "HelpService.h"
 #include "./Oracle/IOracleDAO.h"
 #include "./Oracle/OracleDAOMemory.h"
 #include "./Movement/MovementDAOMemory.h"
 #include "./Movement/MovementService.h"
 #include "./Report/ReportService.h"
+#include "Help/HelpService.h"
+#include "Wallet/IWalletDAO.h"
+#include "Wallet/WalletService.h"
 
 using namespace std;
 

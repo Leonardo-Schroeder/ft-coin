@@ -1,7 +1,7 @@
 #ifndef WALLET_DAO_MEMORY_H
 #define WALLET_DAO_MEMORY_H
 
-#include "IWalletDAO.h"
+#include "./IWalletDAO.h"
 
 class WalletDAOMemory : public IWalletDAO {
 private:

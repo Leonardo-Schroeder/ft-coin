@@ -1,4 +1,5 @@
-#include "Wallet.h"
+#include "./Wallet.h"
+
 #include <sstream>
 
 using namespace std;

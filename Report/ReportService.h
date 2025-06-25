@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../IWalletDAO.h"
 #include "../Movement/IMovementDAO.h"
 #include "../Oracle/IOracleDAO.h"
 #include <memory>
+#include "../Wallet/IWalletDAO.h"
 
 class ReportService {
 private:

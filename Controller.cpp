@@ -1,8 +1,8 @@
 #include "Controller.h"
 #include "Menu.h"
 #include <iostream>
-#include "WalletDAOMemory.h"
 #include "./Oracle/OracleDAOMemory.h"
+#include "Wallet/WalletDAOMemory.h"
 
 using namespace std;
 

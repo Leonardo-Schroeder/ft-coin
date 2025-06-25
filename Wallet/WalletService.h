@@ -1,10 +1,10 @@
 #ifndef WALLET_SERVICE_H
 #define WALLET_SERVICE_H
 
-#include "Wallet.h"
-#include "IWalletDAO.h"
 #include <memory>
 #include <vector>
+#include "./IWalletDAO.h"
+#include "./Wallet.h"
 
 using namespace std;
 

@@ -1,4 +1,4 @@
-#include "WalletDAOMemory.h"
+#include "./WalletDAOMemory.h"
 
 void WalletDAOMemory::addWallet(const Wallet& wallet) {
     wallets.push_back(wallet);

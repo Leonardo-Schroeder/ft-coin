@@ -2,10 +2,10 @@
 #define MOVEMENT_SERVICE_H
 
 #include "IMovementDAO.h"
-#include "../IWalletDAO.h"
 #include "../Oracle/IOracleDAO.h"
 
 #include <memory>
+#include "../Wallet/IWalletDAO.h"
 
 class MovementService {
 private:
