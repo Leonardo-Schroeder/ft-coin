@@ -8,9 +8,9 @@ DatabaseConnection& DatabaseConnection::getInstance() {
 
 DatabaseConnection::DatabaseConnection() {
     const char* DB_HOST = "143.106.243.64";
-    const char* DB_USER = "Pool_25_B10";
-    const char* DB_PASS = "602XMAgB2V ";
-    const char* DB_NAME = "Pool_25_B10";
+    const char* DB_USER = "PooI_25_B10";
+    const char* DB_PASS = "602XMAgB2V";
+    const char* DB_NAME = "PooI_25_B10";
     const unsigned int DB_PORT = 3306;
 
     _connection = mysql_init(nullptr);
