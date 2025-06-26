@@ -10,7 +10,7 @@ class IWalletDAO {
 public:
     virtual ~IWalletDAO() = default;
 
-    virtual void addWallet(const Wallet& wallet) = 0;
+    virtual int addWallet(const Wallet& wallet) = 0;
     virtual Wallet* getWalletById(int id) = 0;
     virtual vector<Wallet> getAllWallets() = 0;
     virtual bool updateWallet(const Wallet& wallet) = 0;

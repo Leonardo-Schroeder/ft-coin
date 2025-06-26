@@ -10,7 +10,7 @@ private:
     int movementId;
     int walletId;
     string date;
-    char type; // 'C' para compra, 'V' para venda
+    char type; // 'C' for buy(compra), 'V' for sell (venda)
     double quantity;
 
 public:

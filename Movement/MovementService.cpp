@@ -88,7 +88,7 @@ void MovementService::registerSell() {
 	}
 
     if (quantity > saldo) {
-        cout << "Insufficient balance. You only have " << saldo << " coins.\n";
+        cout << "Insufficient balance. You only have " << saldo << " coins.\n\n";
         return;
     }
 
@@ -96,7 +96,7 @@ void MovementService::registerSell() {
     Movement m(id, walletId, date, 'V', quantity);
     movementDao->addMovement(m);
 
-    cout << "Sell registered successfully.\n";
+    cout << "Sell registered successfully.\n\n";
 }
 
 void MovementService::showWalletHistory() {

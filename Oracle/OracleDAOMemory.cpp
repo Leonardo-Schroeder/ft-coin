@@ -26,7 +26,7 @@ vector<Oracle> OracleDAOMemory::getAllQuotes() {
 void OracleDAOMemory::populateMockData() {
     quotes.clear();
 
-    // Seed para valores pseudoaleatórios (opcional)
+    //Seed for pseudo-random values ​​(optional)
     srand(static_cast<unsigned int>(time(nullptr)));
 
     double price = 100.0;

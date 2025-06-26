@@ -1,7 +1,12 @@
 #include "./WalletDAOMemory.h"
 
-void WalletDAOMemory::addWallet(const Wallet& wallet) {
-    wallets.push_back(wallet);
+WalletDAOMemory::WalletDAOMemory() : nextId(1) {}
+
+int WalletDAOMemory::addWallet(const Wallet& wallet) {
+	Wallet walletToAdd = wallet;
+	walletToAdd.setId(nextId);
+	wallets.push_back(walletToAdd);
+	return nextId++;
 }
 
 Wallet* WalletDAOMemory::getWalletById(int id) {

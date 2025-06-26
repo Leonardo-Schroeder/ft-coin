@@ -63,7 +63,7 @@ void ReportService::showWalletBalance() {
         if (m.getType() == 'V') coinBalance -= m.getQuantity();
     }
 
-    // Pega a última cotação
+    // Last cotation
     auto quotes = oracleDao->getAllQuotes();
     if (quotes.empty()) {
         cout << "No quotes available in oracle.\n";
@@ -139,7 +139,7 @@ void ReportService::showWalletProfitOrLoss() {
         }
     }
 
-    // Pega a última cotação para calcular valor do saldo
+    // Last Cotation
     auto quotes = oracleDao->getAllQuotes();
     double currentValue = 0.0;
     if (!quotes.empty()) {
@@ -155,9 +155,9 @@ void ReportService::showWalletProfitOrLoss() {
     cout << "Current Coins Value (not sold): R$ " << currentValue << endl;
 
     if (result > 0)
-        cout << "🔼 Profit: R$ " << result << endl << endl;
+        cout << "🔼 Profit: R$ " << COR_VERDE << result << RESET_COR << endl << endl;
     else if (result < 0)
-        cout << "🔽 Loss: R$ " << result << endl << endl;
+        cout << "🔽 Loss: R$ -" << COR_VERMELHA << (result * -1) << RESET_COR << endl << endl;
     else
         cout << "No profit or loss (break-even).\n" << endl;
 }

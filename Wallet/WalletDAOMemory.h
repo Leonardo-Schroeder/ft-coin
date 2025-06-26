@@ -6,9 +6,12 @@
 class WalletDAOMemory : public IWalletDAO {
 private:
     vector<Wallet> wallets;
-
+    int nextId;
 public:
-    void addWallet(const Wallet& wallet) override;
+    WalletDAOMemory();
+    virtual ~WalletDAOMemory() = default;
+    int addWallet(const Wallet& wallet) override;
+
     Wallet* getWalletById(int id) override;
     vector<Wallet> getAllWallets() override;
     bool updateWallet(const Wallet& wallet) override;

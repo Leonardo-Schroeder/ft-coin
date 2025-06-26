@@ -1,18 +1,24 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-
 #include <memory>
 #include <vector>
 #include <string>
+
 #include "./Oracle/IOracleDAO.h"
-#include "./Oracle/OracleDAOMemory.h"
-#include "./Movement/MovementDAOMemory.h"
+#include "./Movement/IMovementDAO.h"
+#include "./Wallet/IWalletDAO.h"
 #include "./Movement/MovementService.h"
 #include "./Report/ReportService.h"
-#include "Help/HelpService.h"
-#include "Wallet/IWalletDAO.h"
-#include "Wallet/WalletService.h"
+#include "./Wallet/WalletService.h"
+#include "./Help/HelpService.h"
+
+#include "./Oracle/OracleDAOMemory.h"
+#include "./Oracle/OracleDAOMariaDB.h"
+#include "./Movement/MovementDAOMemory.h"
+#include "./Movement/MovementDAOMariaDB.h"
+#include "./Wallet/WalletDAOMemory.h"
+#include "./Wallet/WalletDAOMariaDB.h"
 
 using namespace std;
 
@@ -23,14 +29,19 @@ enum class DataBaseSelector {
 
 class Controller {
 private:
-    shared_ptr<IWalletDAO> memoryDBConnection;
-    shared_ptr<IWalletDAO> serverDBConnection;
-    shared_ptr<IMovementDAO> movementDBConnection;
-    shared_ptr<IOracleDAO> oracleDAO = make_shared<OracleDAOMemory>();
+    shared_ptr<IWalletDAO> memoryWalletDAO;
+    shared_ptr<IMovementDAO> memoryMovementDAO;
+
+    shared_ptr<IWalletDAO> serverWalletDAO;
+    shared_ptr<IMovementDAO> serverMovementDAO;
+
+    shared_ptr<IOracleDAO> oracleDAO;
+
     unique_ptr<WalletService> walletService;
     unique_ptr<MovementService> movementService;
-    std::unique_ptr<ReportService> reportService;
+    unique_ptr<ReportService> reportService;
     HelpService helpService;
+
     void launchActions(string title, vector<string> menuItems, vector<void (Controller::*)()> functions);
 
 public:
@@ -38,7 +49,6 @@ public:
     ~Controller();
 
     void start();
-
     void walletMenu();
     void movementMenu();
     void reportsMenu();

@@ -28,7 +28,7 @@ int main()
 
     try
     {
-        // Using MEMORY as the default for now — MariaDB can be added later
+        // Using MEMORY as the default for now — MariaDB
         unique_ptr<Controller> controller = make_unique<Controller>(DataBaseSelector::MEMORY);
         controller->start();
     }
