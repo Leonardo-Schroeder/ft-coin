@@ -11,8 +11,10 @@ Controller::Controller(DataBaseSelector dbSelector)
     memoryWalletDAO = make_shared<WalletDAOMemory>();
     memoryMovementDAO = make_shared<MovementDAOMemory>();
 
+	#ifndef MEMORY_ONLY
     serverWalletDAO = make_shared<WalletDAOMariaDB>();
     serverMovementDAO = make_shared<MovementDAOMariaDB>();
+    #endif
 
     shared_ptr<IWalletDAO> chosenWalletDAO;
     shared_ptr<IMovementDAO> chosenMovementDAO;
@@ -27,20 +29,22 @@ Controller::Controller(DataBaseSelector dbSelector)
             //cout << "Controller started with database in memory." << endl;
             break;
 
-        case DataBaseSelector::MARIADB:
-            chosenWalletDAO = serverWalletDAO;
-            chosenMovementDAO = serverMovementDAO;
-            oracleDAO = make_shared<OracleDAOMariaDB>();
-            //cout << "Controller started with database in MariaDB" << endl;
-            break;
+		#ifndef MEMORY_ONLY
+        	case DataBaseSelector::MARIADB:
+        		chosenWalletDAO = serverWalletDAO;
+        		chosenMovementDAO = serverMovementDAO;
+        		oracleDAO = make_shared<OracleDAOMariaDB>();
+        		cout << "Controller started with database in MariaDB." << endl;
+        		break;
+        #endif
 
         default:
             throw invalid_argument("Problem with Database");
     }
 
-    walletService = make_unique<WalletService>(chosenWalletDAO);
-    movementService = make_unique<MovementService>(chosenMovementDAO, chosenWalletDAO, oracleDAO);
-    reportService = make_unique<ReportService>(chosenWalletDAO, chosenMovementDAO, oracleDAO);
+    walletService.reset(new WalletService(chosenWalletDAO));
+    movementService.reset(new MovementService(chosenMovementDAO, chosenWalletDAO, oracleDAO));
+    reportService.reset(new ReportService(chosenWalletDAO, chosenMovementDAO, oracleDAO));
 }
 
 Controller::~Controller() {}

@@ -1,0 +1,30 @@
+Para usar o script no terminal (linux) é necessário na primeira vez fornecer autorização para buildar:
+chmod +x build-memory.sh
+ou
+chmod +x build-mariadb.sh
+
+Para compilar tudo, simplesmente execute o script:
+./build-memory.sh
+ou
+./build-mariadb.sh
+
+Professor a compilação do MariaDB usa uma biblioteca externa mas a de memória não. Ambas estão em C+11.
+
+Se você preferir compilar direto no terminal pode usar:
+
+g++ \
+-std=c++11 -Wall -Wextra -pedantic -g -DMEMORY_ONLY \
+-o ft-coin-memory \
+Start.cpp \
+Menu.cpp \
+Controller.cpp \
+Help/HelpService.cpp \
+Report/ReportService.cpp \
+Wallet/Wallet.cpp \
+Wallet/WalletService.cpp \
+Wallet/WalletDAOMemory.cpp \
+Movement/Movement.cpp \
+Movement/MovementService.cpp \
+Movement/MovementDAOMemory.cpp \
+Oracle/Oracle.cpp \
+Oracle/OracleDAOMemory.cpp

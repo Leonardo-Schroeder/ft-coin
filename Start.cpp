@@ -29,7 +29,7 @@ int main()
     try
     {
         // Using MEMORY as the default for now — MariaDB
-        unique_ptr<Controller> controller = make_unique<Controller>(DataBaseSelector::MEMORY);
+    	unique_ptr<Controller> controller(new Controller(DataBaseSelector::MEMORY));
         controller->start();
     }
     catch (const exception& e)

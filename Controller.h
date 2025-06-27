@@ -14,11 +14,14 @@
 #include "./Help/HelpService.h"
 
 #include "./Oracle/OracleDAOMemory.h"
-#include "./Oracle/OracleDAOMariaDB.h"
 #include "./Movement/MovementDAOMemory.h"
-#include "./Movement/MovementDAOMariaDB.h"
 #include "./Wallet/WalletDAOMemory.h"
-#include "./Wallet/WalletDAOMariaDB.h"
+
+#ifndef MEMORY_ONLY
+#include "Wallet/WalletDAOMariaDB.h"
+#include "Movement/MovementDAOMariaDB.h"
+#include "Oracle/OracleDAOMariaDB.h"
+#endif
 
 using namespace std;
 
@@ -32,8 +35,10 @@ private:
     shared_ptr<IWalletDAO> memoryWalletDAO;
     shared_ptr<IMovementDAO> memoryMovementDAO;
 
+	#ifndef MEMORY_ONLY
     shared_ptr<IWalletDAO> serverWalletDAO;
     shared_ptr<IMovementDAO> serverMovementDAO;
+	#endif
 
     shared_ptr<IOracleDAO> oracleDAO;
 
